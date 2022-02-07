@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  api:
+    build:
+      context: './'
+      dockerfile: Dockerfile
+    environment:
+      REDIS_URL: "redis://redis:6379"
+      PORT: 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+
+  redis:
+    image: bitnami/redis:6.2.5
+    ports:
+      - 6379:6379
+    environment:
+      ALLOW_EMPTY_PASSWORD: 'yes'
